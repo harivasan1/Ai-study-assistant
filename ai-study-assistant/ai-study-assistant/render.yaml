@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: ai-study-assistant
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false   # set the real value in the Render dashboard, never here
+      - key: CHUNK_SIZE
+        value: "800"
+      - key: CHUNK_OVERLAP
+        value: "120"
+      - key: TOP_K
+        value: "4"
+      - key: EMBEDDING_MODEL
+        value: "text-embedding-3-small"
+      - key: CHAT_MODEL
+        value: "gpt-4o-mini"
